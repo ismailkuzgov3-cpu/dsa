@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b2b4a">
+  <title>Klimate Komfort — инженерные системы под ключ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ============ БАЗА ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Manrope', 'Inter', -apple-system, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 500;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    img { max-width: 100%; display: block; }
+    button, input, textarea { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+    :root {
+      --ink: #0f172a;
+      --ink-2: #1e293b;
+      --gray: #64748b;
+      --gray-light: #94a3b8;
+      --blue: #1f7fcf;
+      --blue-bright: #0ea5e9;
+      --blue-light: #7dd3fc;
+      --blue-deep: #0b2b4a;
+      --blue-pale: #eff6ff;
+      --blue-soft: #e0f2fe;
+      --cyan: #06b6d4;
+      --sky: #38bdf8;
+      --pink: #d62976;
+      --purple: #962fbf;
+      --border-blue: #c7ddf2;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 620px;
+      line-height: 1.65;
+    }
+
+    /* ============ ПРОГРЕСС ============ */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--sky), var(--cyan));
+      background-size: 200% 100%;
+      z-index: 9999;
+      animation: gradientShift 3s linear infinite;
+      box-shadow: 0 0 16px rgba(31,127,207,0.6);
+      transition: width 0.1s linear;
+    }
+    @keyframes gradientShift { to { background-position: 200% 0; } }
+
+    /* ============ REVEAL ============ */
+    .reveal { opacity: 0; transform: translateY(60px); transition: opacity 1.1s var(--ease-out-expo), transform 1.1s var(--ease-out-expo); }
+    .reveal-left { opacity: 0; transform: translateX(-70px); transition: opacity 1.1s var(--ease-out-expo), transform 1.1s var(--ease-out-expo); }
+    .reveal-right { opacity: 0; transform: translateX(70px); transition: opacity 1.1s var(--ease-out-expo), transform 1.1s var(--ease-out-expo); }
+    .reveal-scale { opacity: 0; transform: scale(0.88); transition: opacity 1.1s var(--ease-out-expo), transform 1.1s var(--ease-out-expo); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+      opacity: 1; transform: translate(0) scale(1);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ============ SPLIT TEXT ============ */
+    .split-line { display: block; overflow: hidden; line-height: 1.15; }
+    .split-line > span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 1.2s var(--ease-out-expo);
+    }
+    .split-line.visible > span { transform: translateY(0); }
+
+    /* ============ ШАПКА ============ */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-blue);
+      animation: headerEnter 0.7s var(--ease-out-expo);
+    }
+    @keyframes headerEnter { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: translateY(0); } }
+    .header-grid {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0; gap: 20px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .logo-mark {
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.5s var(--ease-out-expo);
+      flex-shrink: 0;
+    }
+    .logo-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .logo:hover .logo-mark { transform: rotate(-6deg) scale(1.08); }
+    .logo-text h1 {
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .logo-text h1 span { font-weight: 400; color: var(--blue); }
+    .logo-text .tagline {
+      font-size: 0.68rem; color: var(--gray);
+      letter-spacing: 1.2px; text-transform: uppercase;
+      font-weight: 600; margin-top: 2px;
+    }
+    .contact-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 24px;
+      background: var(--ink);
+      color: white;
+      border-radius: 100px;
+      font-weight: 700; font-size: 0.92rem;
+      cursor: pointer; border: none;
+      transition: all 0.4s var(--ease-out-expo);
+      box-shadow: 0 4px 14px rgba(15,23,42,0.2);
+      position: relative; overflow: hidden;
+    }
+    .contact-phone::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .contact-phone > * { position: relative; z-index: 2; }
+    .contact-phone:hover::before { opacity: 1; }
+    .contact-phone i { color: #e8a91b; font-size: 0.85rem; transition: transform 0.5s var(--ease-out-expo); }
+    .contact-phone:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(31,127,207,0.5); }
+    .contact-phone:hover i { transform: rotate(-20deg) scale(1.2); }
+
+    /* ============ ГЕРОЙ (ПК) ============ */
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 620px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #eff6ff 100%);
+      overflow: hidden;
+    }
+    .particles {
+      position: absolute; inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--blue);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat linear infinite;
+    }
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-100px) translateX(40px) scale(1); opacity: 0; }
+    }
+    .hero-text-side {
+      flex: 1 1 55%;
+      display: flex; align-items: center;
+      padding: 80px 0;
+      position: relative; z-index: 2;
+    }
+    .hero-image-side {
+      flex: 1 1 45%;
+      background-image: url('hero.jpg');
+      background-size: cover;
+      background-position: center left;
+      background-repeat: no-repeat;
+      position: relative;
+      min-height: 620px;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes heroZoom {
+      from { background-size: 100% auto; background-position: center left; }
+      to { background-size: 112% auto; background-position: center right; }
+    }
+    .hero-image-side::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(240,249,255,0.95) 0%, rgba(240,249,255,0.4) 20%, transparent 45%);
+      pointer-events: none;
+    }
+    .hero-text h2 {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    .hero-text h2 .accent {
+      color: var(--blue);
+      position: relative;
+      display: inline-block;
+    }
+    .hero-text h2 .accent::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 2px;
+      width: 0; height: 10px;
+      background: rgba(31,127,207,0.18);
+      z-index: -1;
+      animation: accentDraw 1s var(--ease-out-expo) 1.5s forwards;
+    }
+    @keyframes accentDraw { to { width: 100%; } }
+    .hero-text .lead {
+      font-size: 1.15rem;
+      color: var(--gray);
+      margin-bottom: 32px;
+      line-height: 1.65;
+      max-width: 520px;
+      animation: heroFade 1s var(--ease-out-expo) 0.6s both;
+    }
+    @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-text .lead strong { color: var(--ink); font-weight: 700; }
+    .hero-features {
+      list-style: none;
+      display: flex; flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+      animation: heroFade 1s var(--ease-out-expo) 0.8s both;
+    }
+    .hero-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 1rem; color: var(--ink-2);
+      font-weight: 500;
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .hero-features li:hover { transform: translateX(8px); }
+    .hero-features .feat-icon {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-soft) 0%, var(--blue-pale) 100%);
+      color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      transition: all 0.4s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+    }
+    .hero-features li:hover .feat-icon {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      color: white;
+      border-color: transparent;
+      transform: rotate(-12deg) scale(1.12);
+      box-shadow: 0 8px 20px rgba(31,127,207,0.35);
+    }
+    .btn-group {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      animation: heroFade 1s var(--ease-out-expo) 1s both;
+    }
+
+    /* ============ КНОПКИ ============ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px;
+      padding: 16px 30px;
+      border-radius: 100px;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: white;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.25);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .btn-primary > * { position: relative; z-index: 2; }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 18px 40px rgba(31,127,207,0.5);
+    }
+    .btn-outline {
+      background: white;
+      color: var(--ink);
+      border: 1.5px solid var(--border-blue);
+      box-shadow: 0 4px 12px rgba(31,127,207,0.08);
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      background: var(--blue-pale);
+      color: var(--blue);
+      transform: translateY(-4px) scale(1.02);
+    }
+    .btn i { font-size: 0.9rem; transition: transform 0.4s var(--ease-out-expo); }
+    .btn:hover i { transform: scale(1.2) rotate(-8deg); }
+
+    /* ============ СЕКЦИИ ============ */
+    .section { padding: 90px 0; position: relative; }
+    .section-header { margin-bottom: 56px; max-width: 720px; }
+
+    /* ============ УСЛУГИ ============ */
+    .services { background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      transition: all 0.6s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      will-change: transform;
+      box-shadow: 0 4px 16px rgba(31,127,207,0.04);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--sky), var(--cyan));
+      background-size: 200% 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s var(--ease-out-expo);
+    }
+    .service-card:hover::before { transform: scaleX(1); animation: gradientShift 2s linear infinite; }
+    .service-card:hover {
+      border-color: transparent;
+      box-shadow: 0 30px 60px -15px rgba(31,127,207,0.25);
+    }
+    .service-card > * { position: relative; z-index: 2; }
+    .service-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 2.5px;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .service-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--blue-soft) 0%, var(--blue-pale) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      color: var(--blue);
+      margin-bottom: 24px;
+      transition: all 0.6s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      color: white;
+      transform: rotate(-8deg) scale(1.12);
+      box-shadow: 0 16px 32px rgba(31,127,207,0.4);
+      border-color: transparent;
+    }
+    .service-card h3 { font-size: 1.35rem; font-weight: 800; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.4px; }
+    .service-card p { color: var(--gray); font-size: 0.95rem; line-height: 1.65; margin-bottom: 24px; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 800;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: gap 0.4s var(--ease-out-expo);
+    }
+    .service-card:hover .service-link { gap: 16px; }
+
+    /* ============ СЧЁТЧИКИ ============ */
+    .counters-section {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 50%, var(--blue-bright) 100%);
+      padding: 80px 0;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .counters-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      animation: orbFloat 15s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, -50px) scale(1.15); }
+    }
+    .counters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .counter-item {
+      text-align: left;
+      padding-left: 24px;
+      border-left: 2px solid rgba(255,255,255,0.25);
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .counter-item:hover { border-left-color: var(--sky); transform: translateX(8px); }
+    .counter-label {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+    .counter-num {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      color: white;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .counter-num .sym { color: var(--blue-light); font-size: 0.55em; font-weight: 800; }
+    .counter-sub { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+    /* ============ БЕСПЛАТНЫЙ ВЫЕЗД ============ */
+    .free { background: white; }
+    .free-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .free-badges { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0; }
+    .free-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: var(--blue-pale);
+      border: 1px solid var(--border-blue);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .free-badge:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      background: white;
+      box-shadow: 0 10px 24px rgba(31,127,207,0.18);
+    }
+    .free-badge i { color: var(--blue); font-size: 0.85rem; }
+    .free-visual {
+      background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+      border-radius: 24px;
+      padding: 48px 40px;
+      text-align: center;
+      border: 1px solid var(--border-blue);
+      box-shadow: 0 20px 50px -20px rgba(31,127,207,0.15);
+      transition: all 0.6s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+    .free-visual::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), var(--sky), var(--blue));
+      background-size: 200% 100%;
+      animation: gradientShift 3s linear infinite;
+    }
+    .free-visual:hover { transform: translateY(-10px); box-shadow: 0 40px 80px -20px rgba(31,127,207,0.35); }
+    .free-visual-num {
+      font-size: 5rem; font-weight: 800;
+      line-height: 1;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .free-visual-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .free-visual-list { list-style: none; text-align: left; }
+    .free-visual-list li {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.95rem;
+      color: var(--ink-2);
+      font-weight: 600;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-blue);
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+    .free-visual-list li:last-child { border-bottom: none; }
+    .free-visual-list li:hover { transform: translateX(6px); }
+    .free-visual-list i {
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-soft) 0%, var(--blue-pale) 100%);
+      color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: all 0.4s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+    }
+    .free-visual-list li:hover i {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      color: white;
+      border-color: transparent;
+      transform: rotate(-15deg) scale(1.15);
+    }
+
+    /* ============ РАССРОЧКА ============ */
+    .installment {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .installment::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(125,211,252,0.25) 0%, transparent 70%);
+      animation: orbFloat 15s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .installment-wrap {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .installment-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .installment-badge i { color: #e8a91b; animation: boltPulse 2s ease-in-out infinite; }
+    @keyframes boltPulse {
+      0%, 100% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.2) rotate(-10deg); }
+    }
+    .installment-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .installment-title .zero { color: var(--blue-light); display: inline-block; animation: zeroGlow 3s ease-in-out infinite; }
+    @keyframes zeroGlow {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(125,211,252,0)); }
+      50% { filter: drop-shadow(0 0 25px rgba(125,211,252,0.9)); }
+    }
+    .installment-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+    .installment-desc strong { color: white; font-weight: 700; }
+    .installment-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+      margin-bottom: 36px;
+    }
+    .installment-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.95);
+      font-weight: 500;
+    }
+    .installment-features .check {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(125,211,252,0.25);
+      color: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem;
+      flex-shrink: 0;
+    }
+    .installment-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 38px;
+      background: white;
+      color: var(--blue-deep);
+      border: none;
+      border-radius: 100px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.5s var(--ease-out-expo);
+      font-family: inherit;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .installment-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--blue-bright) 0%, var(--sky) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .installment-btn > * { position: relative; z-index: 2; }
+    .installment-btn:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 24px 50px rgba(125,211,252,0.5);
+      color: white;
+    }
+    .installment-btn:hover::before { opacity: 1; }
+    .installment-btn i { transition: transform 0.4s var(--ease-out-expo); color: var(--blue); }
+    .installment-btn:hover i { transform: rotate(-12deg) scale(1.2); color: white; }
+    .installment-visual { display: flex; justify-content: center; }
+    .zero-card {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 26px;
+      padding: 36px 30px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4);
+      animation: cardFloat 6s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+    .zero-card-inner { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; justify-content: space-between; }
+    .zero-card-top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .zero-card-brand { font-size: 0.6rem; font-weight: 800; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; }
+    .zero-card-top i { color: var(--blue-light); font-size: 1.1rem; }
+    .zero-card-num {
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -5px;
+      background: linear-gradient(135deg, white 0%, var(--blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .zero-card-label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .zero-card-rows { display: flex; flex-direction: column; gap: 10px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.2); }
+    .zero-card-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(255,255,255,0.75); }
+    .zero-card-row strong { color: white; font-weight: 700; }
+    .zero-card-row .gold { color: var(--blue-light); font-weight: 800; }
+
+    /* ============ INSTAGRAM ============ */
+    .instagram-section { 
+      background: linear-gradient(180deg, #ffffff 0%, #fef7fb 50%, #ffffff 100%);
+      padding: 70px 0;
+    }
+    .instagram-card {
+      max-width: 1080px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 44px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(214,41,118,0.15);
+      transition: all 0.6s var(--ease-out-expo);
+      box-shadow: 0 30px 70px -30px rgba(214,41,118,0.25);
+    }
+    .instagram-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 34px;
+      padding: 2px;
+      background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75);
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: gradientBorder 6s ease infinite;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 3;
+    }
+    @keyframes gradientBorder {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .instagram-card:hover { transform: translateY(-6px); box-shadow: 0 40px 90px -30px rgba(214,41,118,0.4); }
+    .instagram-icon-big {
+      width: 100px; height: 100px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 2.6rem;
+      box-shadow: 0 20px 40px rgba(214,41,118,0.4);
+      animation: iconPulse 3s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.05) rotate(-3deg); }
+    }
+    .instagram-info { position: relative; z-index: 2; min-width: 0; }
+    .instagram-info h3 { font-size: 1.7rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.5px; line-height: 1.2; }
+    .instagram-info h3 .heart { color: var(--pink); }
+    .instagram-info p { font-size: 1rem; color: var(--gray); line-height: 1.6; margin-bottom: 18px; max-width: 500px; }
+    .instagram-preview-mini { display: flex; gap: 10px; flex-wrap: wrap; }
+    .insta-mini {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e0edff 0%, #f0f7ff 100%);
+      background-size: cover;
+      background-position: center;
+      border: 2px solid white;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+    .insta-mini:hover {
+      transform: translateY(-6px) scale(1.1);
+      box-shadow: 0 12px 24px rgba(214,41,118,0.4);
+      border-color: var(--pink);
+      z-index: 3;
+    }
+    .insta-mini-1 { background-image: url('heat-1.jpg'); }
+    .insta-mini-2 { background-image: url('heat-2.jpg'); }
+    .insta-mini-3 { background-image: url('heat-3.jpg'); }
+    .insta-mini-4 { background-image: url('heat-4.jpg'); }
+    .insta-mini-5 { background-image: url('heat-5.jpg'); }
+    .insta-mini-6 { background-image: url('heat-6.jpg'); }
+    .instagram-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #fa7e1e 0%, #d62976 50%, #962fbf 100%);
+      background-size: 200% 200%;
+      color: white;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.5s var(--ease-out-expo);
+      box-shadow: 0 12px 28px rgba(214,41,118,0.35);
+      position: relative;
+      z-index: 2;
+      white-space: nowrap;
+      animation: gradientShift 4s ease infinite;
+      flex-shrink: 0;
+    }
+    .instagram-btn:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 20px 45px rgba(214,41,118,0.55); }
+
+    /* ============ ПРЕИМУЩЕСТВА ============ */
+    .advantages { background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%); }
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .adv-item {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 26px;
+      transition: all 0.6s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(31,127,207,0.04);
+    }
+    .adv-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--sky), var(--cyan));
+      background-size: 200% 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s var(--ease-out-expo);
+    }
+    .adv-item:hover::after { transform: scaleX(1); animation: gradientShift 2s linear infinite; }
+    .adv-item:hover { border-color: transparent; box-shadow: 0 24px 50px -15px rgba(31,127,207,0.25); }
+    .adv-num { font-size: 0.7rem; font-weight: 800; color: var(--blue); letter-spacing: 2.5px; margin-bottom: 20px; display: block; }
+    .adv-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue-soft) 0%, var(--blue-pale) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      transition: all 0.5s var(--ease-out-expo);
+      border: 1px solid var(--border-blue);
+    }
+    .adv-item:hover .adv-icon {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      color: white;
+      transform: rotate(-10deg) scale(1.15);
+      box-shadow: 0 12px 24px rgba(31,127,207,0.4);
+      border-color: transparent;
+    }
+    .adv-item h4 { font-size: 1rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.3px; }
+    .adv-item p { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+
+    /* ============ СМЕТА ============ */
+    .estimate { background: white; }
+    .estimate-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 24px; margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .estimate-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--blue-pale);
+      border-radius: 20px;
+      border: 1px solid var(--border-blue);
+      box-shadow: 0 8px 24px -8px rgba(31,127,207,0.08);
+    }
+    .estimate-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 520px; }
+    .estimate-table th {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue) 100%);
+      color: white;
+      padding: 16px 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .estimate-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-blue);
+      color: var(--ink-2);
+      transition: background 0.2s ease;
+      background: white;
+    }
+    .estimate-table tbody tr:hover td { background: var(--blue-soft); }
+    .estimate-table tbody tr:last-child td { border-bottom: none; }
+    .estimate-table .num { text-align: center; color: var(--gray-light); width: 60px; font-weight: 700; font-size: 0.8rem; }
+    .estimate-note {
+      margin-top: 24px;
+      padding: 16px 24px;
+      background: var(--blue-pale);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 3px solid var(--blue);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+    .estimate-note i { color: var(--blue); }
+    .estimate-wrapper {
+      max-height: 0; overflow: hidden;
+      transition: max-height 1.2s var(--ease-out-expo), opacity 0.6s ease, margin 0.4s ease;
+      opacity: 0; margin: 0;
+    }
+    .estimate-wrapper.open { max-height: 6000px; opacity: 1; margin: 28px 0 0; }
+    .estimate-cta { margin-top: 36px; text-align: center; }
+
+    /* ============ ФУТЕР ============ */
+    .footer {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #061c33 100%);
+      color: rgba(255,255,255,0.75);
+      padding: 70px 0 30px;
+      position: relative;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .footer-col h4 { color: white; font-size: 0.72rem; margin-bottom: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+    .footer-col p { margin-bottom: 12px; font-size: 0.92rem; display: flex; align-items: center; gap: 12px; }
+    .footer-col i { color: var(--sky); width: 18px; font-size: 0.9rem; }
+    .footer-col a { color: rgba(255,255,255,0.75); transition: color 0.3s ease; }
+    .footer-col a:hover { color: var(--blue-light); }
+    .footer .copy { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+    .footer .badge-free {
+      background: rgba(31,127,207,0.3);
+      color: var(--blue-light);
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    /* ============ МОДАЛКИ ============ */
+    .modal-overlay, .service-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(11,43,74,0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+    }
+    .service-modal-overlay { z-index: 1001; padding: 24px; }
+    .modal-overlay.active, .service-modal-overlay.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal {
+      background: white;
+      border-radius: 24px;
+      max-width: 520px; width: 100%;
+      padding: 40px 36px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+      position: relative;
+      animation: modalPop 0.5s var(--ease-out-expo);
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--blue-pale);
+      border: none;
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .modal-close:hover { background: var(--blue); color: white; transform: rotate(90deg); }
+    .modal h2 { font-size: 1.6rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; padding-right: 40px; line-height: 1.2; }
+    .modal p.sub { color: var(--gray); margin-bottom: 24px; font-size: 0.92rem; }
+    .modal label { font-weight: 700; color: var(--ink); display: block; margin-top: 18px; margin-bottom: 8px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; }
+    .modal input, .modal textarea {
+      width: 100%; padding: 14px 18px;
+      border: 1.5px solid var(--border-blue);
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: var(--blue-pale);
+      color: var(--ink);
+    }
+    .modal input:focus, .modal textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(31,127,207,0.15);
+      background: white;
+    }
+    .modal textarea { resize: vertical; min-height: 80px; }
+    .modal .btn-submit {
+      width: 100%; margin-top: 26px; padding: 18px;
+      font-size: 1rem;
+      background: var(--ink);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.2);
+    }
+    .modal .btn-submit:hover:not(:disabled) { background: var(--blue); transform: translateY(-3px); box-shadow: 0 18px 35px rgba(31,127,207,0.5); }
+    .modal .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .modal .agreement { font-size: 0.76rem; color: var(--gray-light); margin-top: 16px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+    /* ============ МОДАЛКА УСЛУГИ ============ */
+    .service-modal {
+      background: white;
+      border-radius: 28px;
+      max-width: 960px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+      position: relative;
+      animation: modalPop 0.5s var(--ease-out-expo);
+    }
+    .service-modal-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      border: none;
+      color: var(--blue-deep);
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.4s var(--ease-out-expo);
+      z-index: 3;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .service-modal-close:hover { background: var(--blue); color: white; transform: rotate(90deg); }
+    .service-modal-header {
+      padding: 48px 48px 32px;
+      background: linear-gradient(135deg, var(--blue-pale) 0%, #ffffff 100%);
+      position: relative;
+    }
+    .service-modal-icon {
+      width: 72px; height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-bright) 100%);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 28px rgba(31,127,207,0.4);
+    }
+    .service-modal-header h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--ink); letter-spacing: -1px; line-height: 1.15; margin-bottom: 14px; }
+    .service-modal-header .service-modal-desc { font-size: 1.05rem; color: var(--gray); line-height: 1.65; max-width: 640px; }
+    .service-modal-body { padding: 32px 48px 48px; }
+    .service-modal-gallery-title { font-size: 0.72rem; font-weight: 800; color: var(--blue); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+    .service-modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      background: var(--blue-pale);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: all 0.5s var(--ease-out-expo);
+    }
+    .gallery-item::after {
+      content: '\f00e';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      font-size: 1rem;
+      opacity: 0;
+      transition: all 0.5s var(--ease-out-expo);
+    }
+    .gallery-item:hover { transform: scale(1.03) rotate(-1deg); box-shadow: 0 20px 45px rgba(31,127,207,0.3); }
+    .gallery-item:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .service-modal-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-blue);
+    }
+    .service-details-block h4 { font-size: 0.75rem; font-weight: 800; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .service-details-block ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .service-details-block li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
+    .service-details-block li i { color: var(--blue); font-size: 0.75rem; margin-top: 6px; flex-shrink: 0; }
+    .service-modal-cta {
+      margin-top: 32px; padding: 24px;
+      background: linear-gradient(135deg, var(--blue-pale) 0%, var(--blue-soft) 100%);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border: 1px solid var(--border-blue);
+    }
+    .service-modal-cta p { font-weight: 700; color: var(--ink); font-size: 1rem; margin: 0; }
+    .service-modal-cta span { display: block; font-size: 0.85rem; color: var(--gray); font-weight: 500; margin-top: 4px; }
+
+    /* ============ LIGHTBOX ============ */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(11,43,74,0.95);
+      z-index: 2000;
+      display: none; align-items: center; justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.3s ease;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 16px; animation: modalPop 0.4s var(--ease-out-expo); }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.4s var(--ease-out-expo);
+      backdrop-filter: blur(10px);
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.35); transform: rotate(90deg); }
+
+    /* ============ ТОСТ ============ */
+    .toast {
+      position: fixed;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--ink);
+      color: white;
+      padding: 16px 26px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 20px 40px rgba(11,43,74,0.4);
+      z-index: 1100;
+      opacity: 0;
+      transition: all 0.6s var(--ease-out-expo);
+      pointer-events: none;
+      display: flex; align-items: center; gap: 12px;
+      max-width: 90vw;
+      border-left: 3px solid var(--sky);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    .toast i { color: var(--sky); font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ============================================ */
+    /* ============ АДАПТАЦИЯ ==================== */
+    /* ============================================ */
+
+    /* ===== ПЛАНШЕТ (max 1100px) ===== */
+    @media (max-width: 1100px) {
+      .service-grid { grid-template-columns: 1fr; gap: 20px; }
+      .free-grid { grid-template-columns: 1fr; gap: 48px; }
+      .installment-wrap { grid-template-columns: 1fr; gap: 60px; }
+      .adv-grid { grid-template-columns: repeat(2, 1fr); }
+      .counters-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .service-modal-details { grid-template-columns: 1fr; }
+      .service-modal-gallery { grid-template-columns: repeat(2, 1fr); }
+      .instagram-card { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; text-align: center; }
+      .instagram-icon-big { margin: 0 auto; }
+      .instagram-preview-mini { justify-content: center; }
+      .instagram-btn { margin: 0 auto; }
+      .zero-card { max-width: 340px; }
+    }
+
+    /* ===== ПЛАНШЕТ (max 900px) ===== */
+    @media (max-width: 900px) {
+      .section { padding: 70px 0; }
+    }
+
+    /* ===== ТЕЛЕФОН (max 700px) — ГЛАВНАЯ АДАПТАЦИЯ ===== */
+    @media (max-width: 700px) {
+      .container { padding: 0 18px; }
+      .section { padding: 56px 0; }
+
+      /* ---------- ШАПКА ---------- */
+      .header-grid { padding: 10px 0; gap: 10px; flex-wrap: nowrap; }
+      .logo-mark { width: 42px; height: 42px; }
+      .logo { gap: 8px; }
+      .logo-text h1 { font-size: 0.9rem; }
+      .logo-text .tagline { display: none; }
+      .contact-phone { padding: 10px 14px; font-size: 0.78rem; gap: 6px; }
+      .contact-phone span { display: none; }
+      .contact-phone i { font-size: 0.9rem; }
+
+      /* ---------- ГЕРОЙ: ФОТО КАК ФОН ЗА ТЕКСТОМ ---------- */
+      .hero {
+        display: block;
+        min-height: auto;
+        position: relative;
+        background-image:
+          linear-gradient(180deg,
+            rgba(11,43,74,0.82) 0%,
+            rgba(11,43,74,0.72) 40%,
+            rgba(11,43,74,0.88) 100%),
+          url('hero.jpg');
+        background-size: cover, cover;
+        background-position: center 25%, center 25%;
+        background-repeat: no-repeat, no-repeat;
+      }
+      .hero-image-side { display: none; }
+      .hero-text-side {
+        display: block;
+        padding: 56px 0 48px;
+        background: transparent;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Текст белый на тёмном фоне */
+      .hero-text h2 {
+        color: #ffffff !important;
+        letter-spacing: -1px;
+        font-size: clamp(1.9rem, 8.5vw, 2.4rem);
+        margin-bottom: 18px;
+      }
+      .hero-text h2 .accent { color: var(--blue-light) !important; }
+      .hero-text h2 .accent::after { background: rgba(125,211,252,0.3) !important; }
+      .hero-text .lead {
+        color: #d6e9ff !important;
+        font-size: 1rem;
+        margin-bottom: 26px;
+        line-height: 1.6;
+      }
+      .hero-text .lead strong { color: #ffffff !important; }
+
+      .hero-features { gap: 12px; margin-bottom: 30px; }
+      .hero-features li {
+        color: #e6f2ff !important;
+        font-size: 0.92rem;
+        gap: 10px;
+        align-items: flex-start;
+        line-height: 1.45;
+      }
+      .hero-features .feat-icon {
+        width: 28px; height: 28px;
+        font-size: 0.7rem;
+        border-radius: 8px;
+        background: rgba(125,211,252,0.2) !important;
+        color: var(--blue-light) !important;
+        border-color: rgba(125,211,252,0.3) !important;
+        margin-top: 1px;
+      }
+      .hero-features li:hover .feat-icon {
+        background: var(--blue-light) !important;
+        color: var(--blue-deep) !important;
+      }
+
+      /* Кнопки в герое на телефоне */
+      .btn-group { flex-direction: column; width: 100%; gap: 10px; }
+      .btn-group .btn { width: 100%; padding: 16px 24px; font-size: 0.95rem; justify-content: center; }
+      .btn-group .btn-primary {
+        background: var(--blue) !important;
+        box-shadow: 0 12px 28px rgba(31,127,207,0.45) !important;
+      }
+      .btn-group .btn-primary:hover { background: var(--blue-bright) !important; }
+      .btn-group .btn-outline {
+        background: rgba(255,255,255,0.12) !important;
+        border-color: rgba(255,255,255,0.4) !important;
+        color: #ffffff !important;
+        backdrop-filter: blur(10px);
+      }
+      .btn-group .btn-outline:hover {
+        background: rgba(255,255,255,0.25) !important;
+      }
+
+      /* ---------- СЕКЦИИ ---------- */
+      .section-header { margin-bottom: 36px; max-width: 100%; }
+      .section-title { letter-spacing: -0.6px; font-size: clamp(1.6rem, 7vw, 2rem); }
+      .section-sub { font-size: 0.94rem; line-height: 1.6; }
+      .eyebrow { font-size: 0.68rem; letter-spacing: 2px; margin-bottom: 10px; }
+
+      /* ---------- УСЛУГИ ---------- */
+      .service-card { padding: 28px 22px; border-radius: 20px; }
+      .service-icon { width: 56px; height: 56px; font-size: 1.4rem; margin-bottom: 18px; border-radius: 15px; }
+      .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+      .service-card p { font-size: 0.9rem; line-height: 1.55; margin-bottom: 18px; }
+      .service-num { font-size: 0.68rem; margin-bottom: 18px; letter-spacing: 2px; }
+      .service-link { font-size: 0.78rem; letter-spacing: 1.2px; }
+
+      /* ---------- СЧЁТЧИКИ ---------- */
+      .counters-section { padding: 50px 0; }
+      .counters-grid { grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+      .counter-item { padding-left: 14px; }
+      .counter-label { font-size: 0.6rem; letter-spacing: 1.6px; margin-bottom: 8px; }
+      .counter-num { font-size: 2rem; letter-spacing: -1.2px; margin-bottom: 4px; }
+      .counter-sub { font-size: 0.75rem; }
+
+      /* ---------- FREE ---------- */
+      .free-visual { padding: 34px 24px; border-radius: 20px; }
+      .free-visual-num { font-size: 4rem; letter-spacing: -3px; margin-bottom: 6px; }
+      .free-visual-label { font-size: 0.68rem; letter-spacing: 2px; margin-bottom: 24px; }
+      .free-visual-list li { font-size: 0.9rem; padding: 12px 0; gap: 12px; }
+      .free-visual-list i { width: 26px; height: 26px; font-size: 0.7rem; }
+      .free-badges { justify-content: center; margin: 24px 0; gap: 8px; }
+      .free-badge { font-size: 0.74rem; padding: 8px 14px; gap: 6px; }
+      .free .btn { width: 100%; justify-content: center; padding: 16px; }
+
+      /* ---------- РАССРОЧКА ---------- */
+      .installment-wrap { gap: 40px; }
+      .installment-title { letter-spacing: -1px; font-size: clamp(1.9rem, 8vw, 2.4rem); line-height: 1.1; }
+      .installment-badge { font-size: 0.68rem; padding: 8px 14px; letter-spacing: 1.5px; margin-bottom: 20px; }
+      .installment-desc { font-size: 0.96rem; line-height: 1.6; margin-bottom: 26px; }
+      .installment-features { grid-template-columns: 1fr; gap: 12px; margin-bottom: 28px; }
+      .installment-features li { font-size: 0.9rem; }
+      .installment-features .check { width: 22px; height: 22px; font-size: 0.65rem; }
+      .installment-btn { width: 100%; justify-content: center; padding: 16px 28px; font-size: 0.95rem; }
+      .zero-card { max-width: 300px; padding: 30px 26px; border-radius: 22px; margin: 0 auto; }
+      .zero-card-num { font-size: 4rem; letter-spacing: -4px; margin-bottom: 6px; }
+      .zero-card-label { font-size: 0.75rem; }
+      .zero-card-row { font-size: 0.75rem; }
+      .zero-card-top { padding-bottom: 16px; }
+      .zero-card-rows { padding-top: 16px; gap: 9px; }
+
+      /* ---------- INSTAGRAM ---------- */
+      .instagram-section { padding: 50px 0; }
+      .instagram-card { padding: 32px 22px; border-radius: 24px; gap: 22px; text-align: center; }
+      .instagram-icon-big { width: 76px; height: 76px; font-size: 2rem; border-radius: 20px; margin: 0 auto; }
+      .instagram-info h3 { font-size: 1.3rem; }
+      .instagram-info p { font-size: 0.9rem; margin-bottom: 16px; margin-left: auto; margin-right: auto; }
+      .instagram-preview-mini { gap: 8px; justify-content: center; }
+      .insta-mini { width: 46px; height: 46px; border-radius: 11px; }
+      .instagram-btn { padding: 14px 22px; font-size: 0.85rem; width: 100%; justify-content: center; }
+
+      /* ---------- ПРЕИМУЩЕСТВА ---------- */
+      .adv-grid { grid-template-columns: 1fr; gap: 14px; }
+      .adv-item { padding: 24px 20px; border-radius: 18px; }
+      .adv-icon { width: 46px; height: 46px; font-size: 1.05rem; border-radius: 12px; margin-bottom: 16px; }
+      .adv-num { font-size: 0.66rem; margin-bottom: 16px; }
+      .adv-item h4 { font-size: 1rem; }
+      .adv-item p { font-size: 0.85rem; }
+
+      /* ---------- СМЕТА ---------- */
+      .estimate-header { flex-direction: column; align-items: stretch; gap: 16px; margin-bottom: 24px; }
+      .estimate-header .btn { width: 100%; padding: 14px 24px; font-size: 0.9rem; }
+      .estimate-table-wrap { border-radius: 16px; }
+      .estimate-table { font-size: 0.78rem; min-width: 420px; }
+      .estimate-table th { padding: 12px 10px; font-size: 0.62rem; letter-spacing: 1px; }
+      .estimate-table td { padding: 12px 10px; }
+      .estimate-table .num { width: 44px; font-size: 0.72rem; }
+      .estimate-note { font-size: 0.8rem; padding: 12px 16px; width: 100%; gap: 10px; }
+      .estimate-cta .btn { width: 100%; padding: 16px; font-size: 0.95rem; }
+
+      /* ---------- ФУТЕР ---------- */
+      .footer { padding: 48px 0 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 26px; margin-bottom: 30px; text-align: center; }
+      .footer-col p { justify-content: center; font-size: 0.88rem; }
+      .footer-col h4 { font-size: 0.68rem; letter-spacing: 1.8px; margin-bottom: 14px; }
+      .footer .copy { font-size: 0.74rem; padding-top: 24px; }
+
+      /* ---------- МОДАЛКА ФОРМЫ ---------- */
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .modal { border-radius: 24px 24px 0 0; max-width: 100%; padding: 32px 22px calc(28px + env(safe-area-inset-bottom, 0px)); max-height: 92vh; animation: slideUpMobile 0.4s var(--ease-out-expo); }
+      @keyframes slideUpMobile { from { transform: translateY(100%); } to { transform: translateY(0); } }
+      .modal h2 { font-size: 1.3rem; }
+      .modal p.sub { font-size: 0.86rem; margin-bottom: 20px; }
+      .modal label { font-size: 0.72rem; margin-top: 16px; margin-bottom: 6px; }
+      .modal input, .modal textarea { padding: 13px 16px; font-size: 16px; }
+      .modal .btn-submit { padding: 16px; font-size: 0.95rem; }
+      .modal .agreement { font-size: 0.72rem; }
+
+      /* ---------- МОДАЛКА УСЛУГИ ---------- */
+      .service-modal-overlay { padding: 0; align-items: flex-end; }
+    .service-modal { border-radius: 24px 24px 0 0; max-width: 100%; max-height: 96vh; animation: slideUpMobile 0.4s var(--ease-out-expo); display: flex; flex-direction: column; }
+      .service-modal-header { padding: 60px 22px 20px; position: sticky; top: 0; z-index: 5; background: linear-gradient(135deg, var(--blue-pale) 0%, #ffffff 100%); }
+      .service-modal-icon { width: 56px; height: 56px; font-size: 1.4rem; margin-bottom: 16px; border-radius: 16px; }
+      .service-modal-header h2 { font-size: 1.35rem; }
+      .service-modal-header .service-modal-desc { font-size: 0.9rem; }
+      .service-modal-body { 
+  padding: 22px 22px calc(120px + env(safe-area-inset-bottom, 0px)); 
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+      .service-modal-gallery-title { font-size: 0.66rem; margin-bottom: 14px; }
+     .service-modal-gallery { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.gallery-item { aspect-ratio: 4/3; min-height: 140px; }
+      .gallery-item { border-radius: 12px; }
+      .service-modal-details { gap: 22px; padding-top: 22px; }
+      .service-details-block h4 { font-size: 0.68rem; margin-bottom: 12px; }
+      .service-details-block li { font-size: 0.88rem; gap: 10px; }
+      .service-modal-cta { padding: 18px; padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)); flex-direction: column; align-items: stretch; text-align: center; gap: 14px; }
+      .service-modal-cta p { font-size: 0.95rem; }
+      .service-modal-cta span { font-size: 0.8rem; }
+      .service-modal-cta .btn { width: 100%; padding: 14px; font-size: 0.9rem; }
+      .service-modal-close { 
+  top: 14px; 
+  right: 14px; 
+  width: 42px; 
+  height: 42px; 
+  font-size: 1.4rem; 
+  background: white;
+  border: 2px solid var(--blue-pale);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  position: fixed;
+  z-index: 10;
+}
+
+      /* ---------- ТОСТ ---------- */
+      .toast {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        left: 16px; right: 16px;
+        transform: translateY(120px);
+        max-width: none;
+        font-size: 0.85rem;
+        padding: 14px 18px;
+        border-radius: 12px;
+        gap: 10px;
+      }
+      .toast.show { transform: translateY(0); }
+
+      /* ---------- LIGHTBOX ---------- */
+      .lightbox { padding: 16px; }
+      .lightbox-close { top: 12px; right: 12px; width: 42px; height: 42px; font-size: 1.1rem; }
+    }
+
+    /* ===== МАЛЫЙ ТЕЛЕФОН (max 480px) ===== */
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .section { padding: 48px 0; }
+
+      .hero-text-side { padding: 48px 0 40px; }
+      .hero-text h2 { font-size: 1.85rem; letter-spacing: -0.8px; }
+      .hero-text .lead { font-size: 0.94rem; }
+
+      .counters-grid { grid-template-columns: 1fr 1fr; gap: 22px 14px; }
+      .counter-num { font-size: 1.85rem; }
+      .counter-label { font-size: 0.58rem; letter-spacing: 1.4px; }
+
+      .section-title { font-size: 1.5rem; }
+      .free-visual-num { font-size: 3.5rem; }
+      .zero-card { max-width: 260px; padding: 26px 22px; }
+      .zero-card-num { font-size: 3.5rem; }
+      .instagram-icon-big { width: 68px; height: 68px; font-size: 1.8rem; }
+      .instagram-info h3 { font-size: 1.15rem; }
+      .insta-mini { width: 42px; height: 42px; }
+      .service-modal-gallery { grid-template-columns: 1fr; gap: 10px; }
+      .service-modal-header h2 { font-size: 1.2rem; }
+      .modal { padding: 26px 18px calc(24px + env(safe-area-inset-bottom, 0px)); }
+      .modal h2 { font-size: 1.15rem; }
+    }
+
+    /* ===== ОЧЕНЬ МАЛЫЙ (max 360px) ===== */
+    @media (max-width: 360px) {
+      .hero-text h2 { font-size: 1.6rem; }
+      .section-title { font-size: 1.35rem; }
+      .logo-text h1 { font-size: 0.82rem; }
+      .logo-mark { width: 36px; height: 36px; }
+      .counter-num { font-size: 1.6rem; }
+      .insta-mini { width: 38px; height: 38px; }
+      .zero-card { max-width: 240px; }
+      .zero-card-num { font-size: 3rem; }
+    }
+
+    /* ===== ЛАНДШАФТ НА ТЕЛЕФОНЕ ===== */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero-text-side { padding: 40px 0; }
+      .modal { max-height: 100vh; border-radius: 0; }
+      .service-modal { max-height: 100vh; border-radius: 0; }
+    }
+
+    /* ===== БОЛЬШОЙ ЭКРАН ===== */
+    @media (min-width: 1400px) {
+      .container { max-width: 1320px; }
+      .section { padding: 110px 0; }
+    }
+
+    /* ===== SAFE AREA iOS ===== */
+    @supports (padding: max(0px)) {
+      .header { padding-top: env(safe-area-inset-top, 0); }
+      @media (max-width: 700px) {
+        .toast { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ТОСТ -->
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Готово</span></div>
+
+<!-- МОДАЛКА ФОРМЫ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalCloseBtn" type="button">&times;</button>
+    <h2>Вызов мастера на замер</h2>
+    <p class="sub">Заполните форму — специалист приедет в удобное время, выполнит замер и составит смету бесплатно.</p>
+    <form id="orderForm">
+      <input type="hidden" name="access_key" value="bd498e49-f59c-4d86-8d09-8b948a187a15">
+      <input type="hidden" name="subject" value="Новая заявка с сайта Klimate Komfort">
+      <input type="hidden" name="from_name" value="Сайт Klimate Komfort">
+      <input type="checkbox" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off">
+      <label for="name">Ваше имя</label>
+      <input type="text" id="name" name="name" placeholder="Иван Петров" required maxlength="100">
+      <label for="phone">Телефон</label>
+      <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required maxlength="30">
+      <label for="address">Адрес объекта</label>
+      <input type="text" id="address" name="address" placeholder="Город, улица, дом" maxlength="200">
+      <label for="comment">Комментарий</label>
+      <textarea id="comment" name="comment" placeholder="Удобное время, особые пожелания..." maxlength="2000"></textarea>
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+      <p class="agreement"><i class="fas fa-lock" style="color: #10b981;"></i> Данные защищены. Без спама.</p>
+    </form>
+  </div>
+</div>
+
+<!-- МОДАЛКА УСЛУГИ -->
+<div class="service-modal-overlay" id="serviceModalOverlay">
+  <div class="service-modal">
+    <button class="service-modal-close" id="serviceModalClose" type="button">&times;</button>
+    <div class="service-modal-header">
+      <div class="service-modal-icon" id="serviceModalIcon"><i class="fas fa-fire"></i></div>
+      <h2 id="serviceModalTitle">Отопление</h2>
+      <p class="service-modal-desc" id="serviceModalDesc">Котлы, радиаторы, тёплый пол, котельные.</p>
+    </div>
+    <div class="service-modal-body">
+      <span class="service-modal-gallery-title">Фотографии наших работ</span>
+      <div class="service-modal-gallery" id="serviceGallery">
+        <div class="gallery-item" data-slot="1" onclick="openLightbox(this)"></div>
+        <div class="gallery-item" data-slot="2" onclick="openLightbox(this)"></div>
+        <div class="gallery-item" data-slot="3" onclick="openLightbox(this)"></div>
+        <div class="gallery-item" data-slot="4" onclick="openLightbox(this)"></div>
+        <div class="gallery-item" data-slot="5" onclick="openLightbox(this)"></div>
+        <div class="gallery-item" data-slot="6" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="service-modal-details">
+        <div class="service-details-block">
+          <h4>Что входит в услугу</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Проектирование системы</li>
+            <li><i class="fas fa-check"></i> Подбор и расчёт материалов</li>
+            <li><i class="fas fa-check"></i> Монтаж под ключ</li>
+            <li><i class="fas fa-check"></i> Пусконаладка и настройка</li>
+            <li><i class="fas fa-check"></i> Гарантийное обслуживание 3 года</li>
+          </ul>
+        </div>
+        <div class="service-details-block">
+          <h4>Почему выбирают нас</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Работаем с 2019 года</li>
+            <li><i class="fas fa-check"></i> Свой штат мастеров</li>
+            <li><i class="fas fa-check"></i> Более 470 сданных объектов</li>
+            <li><i class="fas fa-check"></i> Прозрачная смета без скрытых платежей</li>
+            <li><i class="fas fa-check"></i> Собственная рассрочка 0%</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-modal-cta">
+        <div>
+          <p>Хотите так же?</p>
+          <span>Оставьте заявку — мастер приедет на замер бесплатно</span>
+        </div>
+        <button class="btn btn-primary" onclick="closeServiceModal(); setTimeout(() => window.openModal(), 300);" type="button">
+          <i class="fas fa-calendar-check"></i> Вызвать мастера
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()" type="button">&times;</button>
+  <img src="" alt="Фото работы" id="lightboxImg">
+</div>
+
+<!-- ШАПКА -->
+<header class="header">
+  <div class="container header-grid">
+    <div class="logo" id="logoHome">
+      <div class="logo-mark"><img src="logo.png" alt="Klimate Komfort"></div>
+      <div class="logo-text">
+        <h1>Klimate <span>Komfort</span></h1>
+        <div class="tagline">Отопление · Канализация · Электрика</div>
+      </div>
+    </div>
+    <button class="contact-phone" id="callButton" type="button">
+      <i class="fas fa-phone"></i>
+      <span>8 (928) 096-66-47</span>
+    </button>
+  </div>
+</header>
+
+<!-- ГЕРОЙ -->
+<section class="hero">
+  <div class="particles" id="particles"></div>
+  <div class="hero-text-side">
+    <div class="container">
+      <div class="hero-text">
+        <span class="eyebrow">Инженерные системы · с 2019 года</span>
+        <h2>
+          <span class="split-line">Дом под ключ —</span>
+          <span class="split-line">от <span class="accent">проекта</span> до запуска</span>
+        </h2>
+        <p class="lead">Отопление, канализация, электрика — <strong>всё в одном месте</strong>. Комплексное оснащение с гарантией 3 года.</p>
+        <ul class="hero-features">
+          <li><span class="feat-icon"><i class="fas fa-check"></i></span> Бесплатный выезд мастера на замер</li>
+          <li><span class="feat-icon"><i class="fas fa-check"></i></span> Точный подсчёт материалов и работ</li>
+          <li><span class="feat-icon"><i class="fas fa-check"></i></span> Гарантия 3 года на все виды работ</li>
+        </ul>
+        <div class="btn-group">
+          <button class="btn btn-primary open-modal-btn" type="button"><i class="fas fa-calendar-check"></i> Вызвать мастера</button>
+          <button class="btn btn-outline" id="smetaToggleBtn" type="button"><i class="fas fa-file-invoice"></i> Пример сметы</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image-side"></div>
+</section>
+
+<!-- УСЛУГИ -->
+<section class="section services">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow reveal">Направления</span>
+      <h2 class="section-title reveal delay-1">Что мы делаем</h2>
+      <p class="section-sub reveal delay-2">Комплексное оснащение инженерных систем — от проекта до ввода в эксплуатацию</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal" data-service="heat">
+        <span class="service-num">01 / ОТОПЛЕНИЕ</span>
+        <div class="service-icon"><i class="fas fa-fire"></i></div>
+        <h3>Отопление</h3>
+        <p>Котлы, радиаторы, тёплый пол, котельные. Проектирование, монтаж и сервисное обслуживание.</p>
+        <span class="service-link">Подробнее <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="service-card reveal delay-1" data-service="water">
+        <span class="service-num">02 / КАНАЛИЗАЦИЯ</span>
+        <div class="service-icon"><i class="fas fa-water"></i></div>
+        <h3>Канализация</h3>
+        <p>Внутренние и наружные сети, септики, очистные сооружения. Работаем с любыми объёмами.</p>
+        <span class="service-link">Подробнее <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="service-card reveal delay-2" data-service="electric">
+        <span class="service-num">03 / ЭЛЕКТРИКА</span>
+        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Электрика</h3>
+        <p>Щиты, проводка, слаботочные системы, автоматика, заземление и освещение под ключ.</p>
+        <span class="service-link">Подробнее <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СЧЁТЧИКИ -->
+<section class="counters-section">
+  <div class="container">
+    <div class="counters-grid">
+      <div class="counter-item reveal-scale">
+        <div class="counter-label">Опыт работы</div>
+        <div class="counter-num"><span class="sym">+</span><span data-target="7">0</span></div>
+        <div class="counter-sub">лет на рынке</div>
+      </div>
+      <div class="counter-item reveal-scale delay-1">
+        <div class="counter-label">Сдано объектов</div>
+        <div class="counter-num"><span class="sym">+</span><span data-target="470">0</span></div>
+        <div class="counter-sub">по всей республике</div>
+      </div>
+      <div class="counter-item reveal-scale delay-2">
+        <div class="counter-label">Довольных клиентов</div>
+        <div class="counter-num"><span data-target="98">0</span><span class="sym">%</span></div>
+        <div class="counter-sub">рекомендуют нас</div>
+      </div>
+      <div class="counter-item reveal-scale delay-3">
+        <div class="counter-label">Гарантия</div>
+        <div class="counter-num"><span data-target="3">0</span><span class="sym">года</span></div>
+        <div class="counter-sub">по договору</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БЕСПЛАТНЫЙ ВЫЕЗД -->
+<section class="section free">
+  <div class="container">
+    <div class="free-grid">
+      <div>
+        <span class="eyebrow reveal">Бесплатно</span>
+        <h2 class="section-title reveal delay-1">Выезд мастера и точная смета</h2>
+        <p class="section-sub reveal delay-2">Наш специалист приедет в удобное время, выполнит все необходимые замеры, рассчитает материалы и составит подробную смету.</p>
+        <div class="free-badges reveal delay-3">
+          <span class="free-badge"><i class="fas fa-check-circle"></i> Без скрытых платежей</span>
+          <span class="free-badge"><i class="fas fa-check-circle"></i> Смета в день замера</span>
+        </div>
+        <div class="reveal delay-4">
+          <button class="btn btn-primary open-modal-btn" type="button"><i class="fas fa-calendar-check"></i> Записать замер</button>
+        </div>
+      </div>
+      <div class="reveal-right delay-2">
+        <div class="free-visual">
+          <div class="free-visual-num">0 ₽</div>
+          <div class="free-visual-label">Стоимость услуг</div>
+          <ul class="free-visual-list">
+            <li><i class="fas fa-check"></i> Выезд мастера на объект</li>
+            <li><i class="fas fa-check"></i> Профессиональные замеры</li>
+            <li><i class="fas fa-check"></i> Подсчёт материалов</li>
+            <li><i class="fas fa-check"></i> Детальная смета работ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- РАССРОЧКА -->
+<section class="section installment">
+  <div class="container">
+    <div class="installment-wrap">
+      <div>
+        <div class="installment-badge reveal">
+          <i class="fas fa-bolt"></i>
+          <span>Собственная рассрочка</span>
+        </div>
+        <h2 class="installment-title reveal delay-1">
+          <span class="zero">0%</span> переплат<br>и процентов
+        </h2>
+        <p class="installment-desc reveal delay-2">
+          Мы предоставляем <strong>собственную рассрочку от Klimate Komfort</strong> — без банков, без переплат, без скрытых комиссий.
+        </p>
+        <ul class="installment-features reveal delay-3">
+          <li><span class="check"><i class="fas fa-check"></i></span> Без процентов и переплат</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Без банков</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Индивидуальный график</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Оформление за 5 минут</li>
+        </ul>
+        <button class="installment-btn open-modal-btn reveal delay-4" type="button">
+          <i class="fas fa-calculator"></i> Рассчитать рассрочку
+        </button>
+      </div>
+      <div class="installment-visual reveal-right delay-2">
+        <div class="zero-card">
+          <div class="zero-card-inner">
+            <div class="zero-card-top">
+              <span class="zero-card-brand">Klimate Komfort</span>
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div>
+              <div class="zero-card-num">0%</div>
+              <div class="zero-card-label">Переплата по договору</div>
+            </div>
+            <div class="zero-card-rows">
+              <div class="zero-card-row"><span>Первый взнос</span><strong>50%</strong></div>
+              <div class="zero-card-row"><span>Срок рассрочки</span><strong>до 3 мес.</strong></div>
+              <div class="zero-card-row"><span>Переплата</span><strong class="gold">0 ₽</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="instagram-section">
+  <div class="container">
+    <div class="instagram-card reveal">
+      <div class="instagram-icon-big">
+        <i class="fab fa-instagram"></i>
+      </div>
+      <div class="instagram-info">
+        <h3>Наши работы в <span class="heart">Instagram</span></h3>
+        <p>Реальные объекты, процесс монтажа и готовые решения. Подписывайтесь — там много интересного 💙</p>
+        <div class="instagram-preview-mini">
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-1"></a>
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-2"></a>
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-3"></a>
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-4"></a>
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-5"></a>
+          <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="insta-mini insta-mini-6"></a>
+        </div>
+      </div>
+      <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener" class="instagram-btn">
+        <i class="fab fa-instagram"></i>
+        <span>@klimate.komfort</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ПРЕИМУЩЕСТВА -->
+<section class="section advantages">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow reveal">Преимущества</span>
+      <h2 class="section-title reveal delay-1">Почему выбирают нас</h2>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-item reveal">
+        <span class="adv-num">01</span>
+        <div class="adv-icon"><i class="fas fa-shield-alt"></i></div>
+        <h4>Гарантия 3 года</h4>
+        <p>Официальная гарантия на все виды работ</p>
+      </div>
+      <div class="adv-item reveal delay-1">
+        <span class="adv-num">02</span>
+        <div class="adv-icon"><i class="fas fa-clock"></i></div>
+        <h4>Соблюдение сроков</h4>
+        <p>Чёткое планирование на каждом этапе</p>
+      </div>
+      <div class="adv-item reveal delay-2">
+        <span class="adv-num">03</span>
+        <div class="adv-icon"><i class="fas fa-file-contract"></i></div>
+        <h4>Прозрачная смета</h4>
+        <p>Детализация до последнего самореза</p>
+      </div>
+      <div class="adv-item reveal delay-3">
+        <span class="adv-num">04</span>
+        <div class="adv-icon"><i class="fas fa-users"></i></div>
+        <h4>Свой штат мастеров</h4>
+        <p>Без субподрядчиков и посредников</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СМЕТА -->
+<section class="section estimate">
+  <div class="container">
+    <div class="estimate-header">
+      <div>
+        <span class="eyebrow reveal">Документы</span>
+        <h2 class="section-title reveal delay-1" style="margin-bottom: 0;">Пример сметы</h2>
+      </div>
+      <button class="btn btn-outline reveal delay-2" id="smetaToggleBtn2" type="button">
+        <i class="fas fa-chevron-down" id="smetaChevron"></i> <span id="smetaToggleText">Показать смету</span>
+      </button>
+    </div>
+    <p class="section-sub reveal" style="margin-bottom: 24px;">Счёт № 1287 от 19.05.2026 — перечень работ и материалов для типового объекта</p>
+    <div class="estimate-wrapper" id="estimateWrapper">
+      <div class="estimate-table-wrap">
+        <table class="estimate-table">
+          <thead>
+            <tr><th>№</th><th>Наименование</th><th>Кол-во</th><th>Ед.</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">01</td><td>Американка 25х1" с внутр. резьбой Kalde (Турция)</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">02</td><td>Американка 25х1" с наруж. резьбой Kalde (Турция)</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">03</td><td>Воздухоотводчик автоматический вертикальный 1/2" VALTEC</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">04</td><td>Газовый котел ARIDEYA КС-Г 25 кВт</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">05</td><td>Евроконус для коллектора, 16мм.</td><td>14</td><td>шт</td></tr>
+            <tr><td class="num">06</td><td>Заглушка дымохода 130мм.</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">07</td><td>Заглушка полипропиленовая с нар. резьб. VALTEC комплект</td><td>2</td><td>пара</td></tr>
+            <tr><td class="num">08</td><td>Зонт дымохода ветрозащитный нерж. 130мм.</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">09</td><td>Коллекторная группа с расходомерами 7 выходов ViEiR</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">10</td><td>Контрагайка стальная 50 мм.</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">11</td><td>Контрагайка чугун D20 (3/4")</td><td>20</td><td>шт</td></tr>
+            <tr><td class="num">12</td><td>Кран Газовый шаровый в/н бабочка 3/4" Vieir</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">13</td><td>Кран шаровый прямой с полусгоном и термометром 1" Vieir</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">14</td><td>Крепление дымохода 130мм</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">15</td><td>Металлопластиковая труба VALTEC PEX-AL-PEX 16Х2,0 ММ</td><td>534</td><td>м</td></tr>
+            <tr><td class="num">16</td><td>Монтажные работы</td><td>1</td><td>кв.м</td></tr>
+            <tr><td class="num">17</td><td>Муфта 1" вн/вн</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">18</td><td>Муфта стальная 50 мм.</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">19</td><td>Набор для радиаторной батареи 1/2</td><td>10</td><td>шт</td></tr>
+            <tr><td class="num">20</td><td>Насос циркуляц. Флянц. SHIMGE 40/10</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">21</td><td>Насос циркуляционный 25/4 VALTEC</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">22</td><td>Насосно-смесительный узел для теплого пола</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">23</td><td>Отвод 90гр. дымохода нерж. 130мм</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">24</td><td>Отвод стальн с резьбой 3/4 (пистолет)</td><td>20</td><td>шт</td></tr>
+            <tr><td class="num">25</td><td>Отвод стальн. под сварку ДУ-40 1-1/2</td><td>16</td><td>шт</td></tr>
+            <tr><td class="num">26</td><td>Пена монтажная</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">27</td><td>Планка для смесителя d20 1/2 Kalde</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">28</td><td>Полусгон стальной 40 мм</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">29</td><td>Полусгон стальной 50 мм</td><td>2</td><td>шт</td></tr>
+            <tr><td class="num">30</td><td>ПП труба d32 стекловолокно Kalde</td><td>8</td><td>м</td></tr>
+            <tr><td class="num">31</td><td>Радиатор "ТЕПЛО МИР" 500/100 1 секция</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">32</td><td>Расширительный бак 30 л.</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">33</td><td>Скоба d25 Kalde</td><td>8</td><td>шт</td></tr>
+            <tr><td class="num">34</td><td>Теплоизоляция для теплого пола Алюбабл с разметкой</td><td>92</td><td>кв.м</td></tr>
+            <tr><td class="num">35</td><td>Тройник d25 Kalde</td><td>10</td><td>шт</td></tr>
+            <tr><td class="num">36</td><td>Тройник дымохода нерж. 130мм.</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">37</td><td>Тройник перех. d25*20*25 Kalde</td><td>20</td><td>шт</td></tr>
+            <tr><td class="num">38</td><td>Труба дымоходная нерж. 130мм./1м.</td><td>5</td><td>шт</td></tr>
+            <tr><td class="num">39</td><td>Труба металическая D20</td><td>2</td><td>м</td></tr>
+            <tr><td class="num">40</td><td>Труба металическая D40</td><td>56</td><td>м</td></tr>
+            <tr><td class="num">41</td><td>Угол комбинированный с внутр. резьбой 20*1/2</td><td>3</td><td>шт</td></tr>
+            <tr><td class="num">42</td><td>Хомут нейлоновый 20см.</td><td>8</td><td>шт</td></tr>
+            <tr><td class="num">43</td><td>Шкаф распределительный встроенный ШРВ-3</td><td>1</td><td>шт</td></tr>
+            <tr><td class="num">44</td><td>Штырь (крепеж)</td><td>30</td><td>шт</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="estimate-note">
+        <i class="fas fa-info-circle"></i>
+        Всего наименований: 44. Полная смета формируется индивидуально.
+      </div>
+    </div>
+    <div class="estimate-cta reveal">
+      <button class="btn btn-primary open-modal-btn" type="button">
+        <i class="fas fa-calculator"></i> Рассчитать смету на ваш объект
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col reveal">
+        <h4>Контакты</h4>
+        <p><i class="fas fa-phone"></i> 8 (928) 096-66-47</p>
+        <p><i class="fas fa-envelope"></i> KlimateKomfort@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Карабулак, ул. Орджоникидзе, 34</p>
+      </div>
+      <div class="footer-col reveal delay-1">
+        <h4>Режим работы</h4>
+        <p><i class="fas fa-clock"></i> Пн–Чт: 8:00 – 17:00</p>
+        <p><i class="fas fa-clock"></i> Сб–Вс: 8:00 – 17:00</p>
+        <span class="badge-free"><i class="fas fa-truck"></i> Выезд в день заявки</span>
+      </div>
+      <div class="footer-col reveal delay-2">
+        <h4>Услуги</h4>
+        <p><i class="fas fa-fire"></i> Отопление</p>
+        <p><i class="fas fa-water"></i> Канализация</p>
+        <p><i class="fas fa-bolt"></i> Электрика</p>
+      </div>
+      <div class="footer-col reveal delay-3">
+        <h4>Соцсети</h4>
+        <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/klimate.komfort" target="_blank" rel="noopener">@klimate.komfort</a></p>
+      </div>
+    </div>
+    <div class="copy">© 2026 Klimate Komfort. Отопление · Канализация · Электрика. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // ===== PROGRESS =====
+    const progressBar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / h) * 100;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+
+    // ===== ТОСТ =====
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMessage');
+    let toastTimeout;
+    function showToast(msg, icon = 'fa-check-circle') {
+      toastMsg.textContent = msg;
+      toast.querySelector('i').className = 'fas ' + icon;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // ===== PARTICLES =====
+    const particles = document.getElementById('particles');
+    if (particles) {
+      for (let i = 0; i < 35; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+        p.style.background = ['#1f7fcf', '#0ea5e9', '#06b6d4', '#7dd3fc'][Math.floor(Math.random() * 4)];
+        particles.appendChild(p);
+      }
+    }
+
+    // ===== SPLIT TEXT =====
+    const splitObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const lines = entry.target.querySelectorAll('.split-line');
+          lines.forEach((line, i) => {
+            setTimeout(() => line.classList.add('visible'), i * 180 + 200);
+          });
+          splitObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.hero-text h2').forEach(el => splitObs.observe(el));
+
+    // ===== REVEAL =====
+    const revealEl = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEl.forEach(el => revealObs.observe(el));
+
+    // ===== МОДАЛКА ФОРМЫ =====
+    const overlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const form = document.getElementById('orderForm');
+    window.openModal = function() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.open-modal-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); window.openModal(); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+    // ===== МОДАЛКА УСЛУГИ =====
+    const serviceOverlay = document.getElementById('serviceModalOverlay');
+    const serviceClose = document.getElementById('serviceModalClose');
+    const serviceTitle = document.getElementById('serviceModalTitle');
+    const serviceDesc = document.getElementById('serviceModalDesc');
+    const serviceIcon = document.getElementById('serviceModalIcon');
+
+    const serviceData = {
+      heat: { title: 'Отопление', desc: 'Котлы, радиаторы, тёплый пол, котельные. Проектирование, монтаж и сервисное обслуживание.', icon: 'fa-fire' },
+      water: { title: 'Канализация', desc: 'Внутренние и наружные сети канализации, септики, очистные сооружения.', icon: 'fa-water' },
+      electric: { title: 'Электрика', desc: 'Щиты, проводка, слаботочные системы, автоматика, заземление и освещение под ключ.', icon: 'fa-bolt' }
+    };
+
+    const galleryPhotos = {
+      heat:     ['heat-1.jpg','heat-2.jpg','heat-3.jpg','heat-4.jpg','heat-5.jpg','heat-6.jpg'],
+      water:    ['water-1.jpg','water-2.jpg','water-3.jpg','water-4.jpg','water-5.jpg','water-6.jpg'],
+      electric: ['electric-1.jpg','electric-2.jpg','electric-3.jpg','electric-4.jpg','electric-5.jpg','electric-6.jpg']
+    };
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const key = card.dataset.service;
+        const data = serviceData[key];
+        if (!data) return;
+
+        serviceTitle.textContent = data.title;
+        serviceDesc.textContent = data.desc;
+        serviceIcon.innerHTML = `<i class="fas ${data.icon}"></i>`;
+
+        const photos = galleryPhotos[key];
+        document.querySelectorAll('#serviceGallery .gallery-item').forEach((el, i) => {
+          el.style.backgroundImage = `url('${photos[i]}')`;
+          el.dataset.src = photos[i];
+        });
+
+        serviceOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeServiceModal() {
+      serviceOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    window.closeServiceModal = closeServiceModal;
+    serviceClose.addEventListener('click', closeServiceModal);
+    serviceOverlay.addEventListener('click', (e) => { if (e.target === serviceOverlay) closeServiceModal(); });
+
+    // ===== LIGHTBOX =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    window.openLightbox = function(el) {
+      const src = el.dataset.src || (el.style.backgroundImage.match(/url\(['"]?(.+?)['"]?\)/) || [])[1];
+      if (!src) return;
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+    }
+
+    window.closeLightbox = function() {
+      lightbox.classList.remove('active');
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeServiceModal();
+        closeLightbox();
+      }
+    });
+
+    // ===== ЛОГО =====
+    document.getElementById('logoHome').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== ОТПРАВКА ФОРМЫ =====
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      if (!name || !phone) {
+        showToast('Заполните имя и телефон', 'fa-exclamation-circle');
+        return;
+      }
+      const submitBtn = form.querySelector('.btn-submit');
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправляем...';
+      try {
+        const formData = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Заявка отправлена! Мастер перезвонит в течение 15 минут', 'fa-check-circle');
+          form.reset();
+          setTimeout(() => closeModal(), 1200);
+        } else throw new Error(data.message || 'Ошибка отправки');
+      } catch (err) {
+        showToast(err.message || 'Позвоните: 8 (928) 096-66-47', 'fa-exclamation-circle');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHTML;
+      }
+    });
+
+    // ===== СМЕТА =====
+    const wrapper = document.getElementById('estimateWrapper');
+    const toggleBtn1 = document.getElementById('smetaToggleBtn');
+    const toggleBtn2 = document.getElementById('smetaToggleBtn2');
+    const chevron = document.getElementById('smetaChevron');
+    const toggleText = document.getElementById('smetaToggleText');
+    function toggleEstimate(e) {
+      e.preventDefault();
+      const isOpen = wrapper.classList.contains('open');
+      if (isOpen) {
+        wrapper.classList.remove('open');
+        chevron.className = 'fas fa-chevron-down';
+        toggleText.textContent = 'Показать смету';
+      } else {
+        wrapper.classList.add('open');
+        chevron.className = 'fas fa-chevron-up';
+        toggleText.textContent = 'Скрыть смету';
+        setTimeout(() => {
+          document.querySelector('.estimate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+    toggleBtn1.addEventListener('click', toggleEstimate);
+    toggleBtn2.addEventListener('click', toggleEstimate);
+
+    // ===== ТЕЛЕФОН =====
+    document.getElementById('callButton').addEventListener('click', () => {
+      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        window.location.href = 'tel:+79280966647';
+      } else {
+        showToast('Набираем номер 8 (928) 096-66-47', 'fa-phone');
+      }
+    });
+
+    // ===== СЧЁТЧИКИ =====
+    const counters = document.querySelectorAll('.counter-num span[data-target]');
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const duration = 2000;
+          const start = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+          }
+          requestAnimationFrame(tick);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => counterObs.observe(el));
+
+    // ===== ПРИВЕТСТВИЕ =====
+    setTimeout(() => {
+      showToast('Нажмите на карточку услуги — покажем фото работ', 'fa-images');
+    }, 2500);
+  })();
+</script>
+</body>
+</html>
